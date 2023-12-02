@@ -1,24 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import MainPage from './components/MainPage';
 
-function App() {
+import {BrowserRouter,Routes, Route} from 'react-router-dom';
+
+//ROUTING PAGE AND NAVBAR PAGE
+function App() { 
   return (
+    <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/*Navbar Element from bootstrap*/}
+       <Navbar bg="dark" data-bs-theme="dark"> 
+        <Container>
+          <Navbar.Brand href="/">Navbar</Navbar.Brand>{/* */}
+          <Nav className="me-auto">
+            {/*Creates link names that will redirect the user by clicking the buttons*/}
+            <Nav.Link href="/">Home</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+      <Routes>
+        <Route path = '/' element={<MainPage></MainPage>}></Route>{/*Establishes the root to be the main page component*/}
+      </Routes>
     </div>
+    </BrowserRouter>
   );
 }
 
