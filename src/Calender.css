@@ -1,0 +1,12 @@
+.centered-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh; /* Adjust the height as needed */
+  }
+  
+  .centered-content {
+    background-color: darkblue;
+    text-align: center;
+    line-height: 200px; /* Center content vertically */
+  }
