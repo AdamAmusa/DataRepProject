@@ -6,6 +6,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { CloseButton } from 'react-bootstrap';
+import axios from 'axios';
 
 function CalenderView() {
     const [day, onChange] = useState(new Date());
@@ -13,9 +14,10 @@ function CalenderView() {
 
     const [event, setEvent] = useState('');
     const [time, setTime] = useState('');
-    
+
+    const weekDay = day.toLocaleDateString('en-US', {weekday:'long'})
     const date = day.getDate()
-    const month = day.getMonth() + 1
+    const month = day.toLocaleDateString('end-US', {month:'long'})
     const year = day.getFullYear();
 
     const clickDay = () => {
@@ -28,18 +30,28 @@ function CalenderView() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let formatDay = `${date}-${month}-${year}`;
-    
-
-       
+        let formatDay = `${weekDay} ${date} ${month} ${year}`;
 
         console.log("Day: " + formatDay +
-        " Event: " + event +
+            " Event: " + event +
             " Time: " + time);
 
-            
-            setShowForm(false);
+        const schedule = {
+            day: formatDay,
+            event: event,
+            time: time
+        }
+
+        //logs information to the web page console
+        axios.post('http://localhost:4000/api/schedule', schedule)
+        .then()
+        .catch();
+    
+        setShowForm(false);
     }
+
+        
+    
 
 
     return (
