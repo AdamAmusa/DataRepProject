@@ -14,8 +14,8 @@ function ViewSchedule(props) {
 
         <div>
             {/*Card container */}
-            <div >
-            <Card className="card">
+            <div>
+            <Card className="card" >
                 <Card.Body>
                     <div className="card-contents">
                     <Card.Title>{props.schedule.event}</Card.Title>
@@ -25,10 +25,9 @@ function ViewSchedule(props) {
                     </Card.Text>
                     </div>
                 </Card.Body>
-                <Countdown date={props.schedule.day}/> 
+                 <Countdown date={props.schedule.day}/>
             </Card>
             </div>
-
         </div>
 
 );
