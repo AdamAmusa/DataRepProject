@@ -1,9 +1,11 @@
 
 
 .card {
-    border-width: 50%; /* Adjust the width as needed */
+    border-width: 60%; /* Adjust the width as needed */
     margin: 10px; /* Add margin for spacing */
-    width:calc(50% - 20px);
+    width:calc(120% - 50px);
+    
+    
 
   }
 
