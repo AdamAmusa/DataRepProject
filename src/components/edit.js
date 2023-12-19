@@ -6,6 +6,11 @@ import { useNavigate } from "react-router-dom";
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
+import Calendar from 'react-calendar';
+import "react-datepicker/dist/react-datepicker.css";
+import { Container } from 'react-bootstrap';
+import '.././Edit.css';
+
 
 
 export default function Edit() {
@@ -18,9 +23,22 @@ export default function Edit() {
     const [day, setDay] = useState("");
     const [time, setTime] = useState("");
     const [event, setEvent] = useState("");
+
+
+    const [selectDate, onChange] = useState(new Date());
     // useNavigate return a function that we can use to navigate
     const navigate = useNavigate();
     //useEffect Hook is similar componentDidMount
+
+    const weekDay = selectDate.toLocaleDateString('en-US', {weekday:'long'})
+    const date = selectDate.getDate()
+    const month = selectDate.toLocaleDateString('end-US', {month:'long'})
+    const year = selectDate.getFullYear();
+
+    let formatDay = `${weekDay} ${date} ${month} ${year}`;
+
+
+
     useEffect(() => {
         //axios is a promised based web client
         //make a HTTP Request with GET method and pass as part of the
@@ -40,7 +58,7 @@ export default function Edit() {
         process.preventDefault();
         const newSchedule = {//data is organised for json format
             id: id,
-            day: day,
+            day: formatDay,
             event: event,
             time: time
         };
@@ -51,56 +69,71 @@ export default function Edit() {
             });
     }
     return (
-        <div>
+        <div style={{ height: '900px' }}>
+
             <h1 style={{ color: 'white'}}>Edit</h1>
-            <Form onSubmit={handleSubmit} style={{ width: '45%',  }}>{/*When the form is submitted the function is called to handle the data */}
+            <p style={{color: 'white'}}>Use the calander to change the date</p>
+            <Container className='Edit'>
+                <Row>
+                    <Col className='mr-4'>
+                        <Form onSubmit={handleSubmit} className='Col1'  >{/*When the form is submitted the function is called to handle the data */}
 
-            <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm={2} style={{ color: 'white' }}>
-                        Event
-                    </Form.Label>
-                    <Col sm={10}>
-                        <div className='mb-4'>
-                            <input type="text"
-                                className="form-control"
-                                value={event}//variable is assigned as a property
-                                onChange={(e) => setEvent(e.target.value)} />
+                            <Form.Group as={Row} className="mb-3">
+                                <Form.Label column sm={2} style={{ color: 'white' }}>
+                                    Event
+                                </Form.Label>
+                                <Col sm={10}>
+                                    <div className='mb-4'>
+                                        <input type="text"
+                                            className="form-control"
+                                            value={event}//variable is assigned as a property
+                                            onChange={(e) => setEvent(e.target.value)} />
+                                    </div>
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group as={Row} className="mb-3">
+                                <Form.Label column sm={2} style={{ color: 'white' }}>
+                                    Day
+                                </Form.Label>
+                                <Col sm={10}>
+                                    <div className='mb-4'>
+                                        <input type="text"
+                                            className="form-control"
+                                            disabled='true'
+                                            value={formatDay}//variable is assigned as a property
+                                            onChange={(e) => setDay(e.target.value)} />
+                                    </div>
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group as={Row} className="mb-3">
+                                <Form.Label column sm={2} style={{ color: 'white' }}>
+                                    Time
+                                </Form.Label>
+                                <Col sm={10}>
+                                    <div className='mb-4'>
+                                        <input type="text"
+                                            className="form-control"
+                                            
+                                            value={time}//variable is assigned as a property
+                                            onChange={(e) => setTime(e.target.value)} />
+                                    </div>
+                                </Col>
+                                <div className="form-group">
+                                    <input type="submit" value="Edit Book" className="btn btn-primary" />
+                                </div>
+                            </Form.Group>
+
+                        </Form>
+                    </Col>
+                    <Col>
+                        <div >
+                            <Calendar onChange={onChange} value={selectDate} />
                         </div>
                     </Col>
-                </Form.Group>
-
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm={2} style={{ color: 'white' }}>
-                        Day
-                    </Form.Label>
-                    <Col sm={10}>
-                        <div className='mb-4'>
-                            <input type="text"
-                                className="form-control"
-                                value={day}//variable is assigned as a property
-                                onChange={(e) => setDay(e.target.value)} />
-                        </div>
-                    </Col>
-                </Form.Group>
-
-                <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm={2} style={{ color: 'white' }}>
-                        Time
-                    </Form.Label>
-                    <Col sm={10}>
-                        <div className='mb-4'>
-                            <input type="text"
-                                className="form-control"
-                                value={time}//variable is assigned as a property
-                                onChange={(e) => setTime(e.target.value)} />
-                        </div>
-                    </Col>
-                    <div className="form-group">
-                    <input type="submit" value="Edit Book" className="btn btn-primary" />
-                     </div>
-                </Form.Group>
-              
-            </Form>
+                </Row>
+            </Container>
         </div >
     );
 }

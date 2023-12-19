@@ -42,11 +42,13 @@ function LoadSchedule() {
                 }
             )
     }
+     
 
     return data.map(
         (data) =>{
-            return <ViewSchedule schedule={data} ReloadData = {()=> {Reload()}}></ViewSchedule>
+            return <ViewSchedule  schedule={data} ReloadData = {()=> {Reload()}}></ViewSchedule>
         }
+         
     );
 
 

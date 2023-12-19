@@ -11,7 +11,7 @@ function MainPage() {
 
     return (
 
-        <div>
+        <div className="MainPage">
             <h1><font color="white">Scheduler</font></h1>
             <p><font color="gray">Schedule an event using the calander</font></p>
             <Calander></Calander>

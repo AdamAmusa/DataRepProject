@@ -18,6 +18,8 @@ function ViewSchedule(props) {
 
 
         <div >
+          
+ 
             {/*Card container */}
             <Container className="myContainer">
                 <Row >
