@@ -6,6 +6,7 @@ import Countdown from 'react-countdown';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import axios from 'axios';
 
 function ViewSchedule(props) {
 
@@ -34,8 +35,17 @@ function ViewSchedule(props) {
                         </Card>
                     </Col>
                     <Col>
-                        <div className="mb-4"><Button size="lg"  as="input" type="button" value="Delete"/></div>
-                        <div className="mb-4"><Button size="lg" as="input" type="button" value="Edit"/></div>
+                        <div className="mb-4">
+                            <Button variant = "danger" as="input" type='button' size="lg" onClick={(e)=>{
+                                axios.delete('http://localhost:4000/api/schedule/'+props.schedule._id)
+                                .then((res)=>{
+                                    let reload = props.ReloadData();
+                                    
+                                })
+                                .catch();
+                            }} value="Delete"/>
+                        </div>
+                        <div className="mb-4"><Button  size="lg" as="input" type="button" value="Edit"/></div>
                     </Col>
                 </Row>
             </Container>

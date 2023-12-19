@@ -47,6 +47,14 @@ const scheduleSchema = new mongoose.Schema({
 //confirms which database you would like the collection to be in
 const scheduleModel = mongoose.model('my_schedule', scheduleSchema);
 
+//server listens for a http request with a delete method
+app.delete('/api/schedule/:id', async (req, res)=>{
+    console.log("Delete: "+req.params.id);
+    
+    let schedule= await scheduleModel.findByIdAndDelete(req.params.id);//find a book with the id and deletes it
+    res.send(schedule);
+})
+
 app.post('/api/schedule',(req, res)=>{//routes the HTTP PUT requests to the specified path with the specified callback functions based off of the id
     console.log(req.body);
     //Creates new book in the database using data from the create page
@@ -63,6 +71,9 @@ app.get('/api/schedules', async(req,res) =>{
     let schedules = await scheduleModel.find({});
     res.json(schedules);
 })
+
+
+
 
 
 app.get('/', (req, res)=>{
