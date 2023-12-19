@@ -55,9 +55,20 @@ app.delete('/api/schedule/:id', async (req, res)=>{
     res.send(schedule);
 })
 
+
+
+app.put('/api/schedule/:id', async(req, res)=>{//routes the HTTP PUT requests to the specified path with the specified callback functions based off of the id
+
+    console.log("Update: " + req.params.id);
+
+    let schedule = await scheduleModel.findByIdAndUpdate(req.params.id, req.body, {new:true}); //replaces the whole mongose data from a specific id
+
+    res.send(schedule);//sends data to webpage
+})
+
 app.post('/api/schedule',(req, res)=>{//routes the HTTP PUT requests to the specified path with the specified callback functions based off of the id
     console.log(req.body);
-    //Creates new book in the database using data from the create page
+    //Creates new schedule in the database using data from the create page
     scheduleModel.create({
         day: req.body.day,
         event: req.body.event,
@@ -72,8 +83,12 @@ app.get('/api/schedules', async(req,res) =>{
     res.json(schedules);
 })
 
+app.get('/api/schedule/:identifier', async(req,res)=>{
+    console.log(req.params.identifier);
 
-
+    let schedule = await scheduleModel.findById(req.params.identifier); //Finds book by id
+    res.send(schedule);//sends the book that was found to the webpage
+})
 
 
 app.get('/', (req, res)=>{

@@ -1,7 +1,4 @@
 import Calander from "./CalenderView";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDay, faClipboardList, faCalendarDays } from '@fortawesome/free-solid-svg-icons';
-import Button from 'react-bootstrap/Button';
 import '.././MainPage.css';
 
 function MainPage() {
@@ -15,7 +12,8 @@ function MainPage() {
     return (
 
         <div>
-            <h1> This is the MainPage</h1>
+            <h1><font color="white">Scheduler</font></h1>
+            <p><font color="gray">Schedule an event using the calander</font></p>
             <Calander></Calander>
             
 

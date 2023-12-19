@@ -9,4 +9,13 @@
     background-color: darkblue;
     text-align: center;
     line-height: 200px; /* Center content vertically */
+    margin-right: 20px;
   }
+
+  .calander-style{
+    width: 80vh;
+   
+   color:white;
+
+  }
+

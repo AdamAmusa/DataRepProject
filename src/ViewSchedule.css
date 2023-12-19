@@ -2,11 +2,15 @@
 
 .card {
     border-width: 60%; /* Adjust the width as needed */
-    margin: 10px; /* Add margin for spacing */
+    margin: 30px; /* Add margin for spacing */
     width:calc(120% - 50px);
     
     
 
+  }
+
+  .myContainer{
+    margin-right: 50px;
   }
 
   .card-contents{

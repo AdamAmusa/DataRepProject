@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function ViewSchedule(props) {
 
@@ -16,9 +17,9 @@ function ViewSchedule(props) {
 
 
 
-        <div>
+        <div >
             {/*Card container */}
-            <Container>
+            <Container className="myContainer">
                 <Row >
                     <Col>
                         <Card className="card" >
@@ -45,7 +46,9 @@ function ViewSchedule(props) {
                                 .catch();
                             }} value="Delete"/>
                         </div>
-                        <div className="mb-4"><Button  size="lg" as="input" type="button" value="Edit"/></div>
+                        <div className="mb-4">
+                                <Link  className="btn btn-primary"  to={'/edit/' + props.schedule._id}>Edit</Link>  
+                        </div>
                     </Col>
                 </Row>
             </Container>
