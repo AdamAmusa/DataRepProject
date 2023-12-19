@@ -7,49 +7,53 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Alert, CloseButton, FormGroup } from 'react-bootstrap';
 import axios from 'axios';
+import '.././global.css';
+import Textarea from '@mui/joy/Textarea';
 
 
 function CalenderView() {
     const [day, onChange] = useState(new Date());
     const [event, setEvent] = useState('');
     const [time, setTime] = useState('');
+    const [description, setDescription] = useState('');
 
-    const weekDay = day.toLocaleDateString('en-US', {weekday:'long'})
+    const weekDay = day.toLocaleDateString('en-US', { weekday: 'long' })
     const date = day.getDate()
-    const month = day.toLocaleDateString('end-US', {month:'long'})
+    const month = day.toLocaleDateString('end-US', { month: 'long' })
     const year = day.getFullYear();
 
     let formatDay = `${weekDay} ${date} ${month} ${year}`;
 
 
     const handleSubmit = (e) => {
-        
- 
-        
+
+
+
 
         e.preventDefault();
-        
+
 
         console.log("Day: " + formatDay +
             " Event: " + event +
             " Time: " + time);
 
         const schedule = {
-            day: formatDay,
+            day: day,
             event: event,
-            time: time
+            time: time,
+            description: description
         }
 
         //logs information to the web page console
         axios.post('http://localhost:4000/api/schedule', schedule)
-        .then()
-        .catch();
-    
-        
+            .then()
+            .catch();
+
+
     }
 
-        
-    
+
+
 
 
     return (
@@ -62,22 +66,27 @@ function CalenderView() {
 
             <div>
                 {/* Render the form when showForm is true */}
-                    <Form onSubmit={handleSubmit} >
-                        <FormGroup>
-                            <Form.Label style={{color:'red'}}>{formatDay}</Form.Label>
-                        </FormGroup>
-                        <Form.Group className='mb-3'>
-                            <Form.Label style={{color:'white'}}>Event</Form.Label>
-                            <Form.Control onChange={(e) => { setEvent(e.target.value) }} value={event} placeholder='Enter event' />
-                        </Form.Group>
-                        <Form.Group className='mb-3' controlId='formBasicPassword'>
-                            <Form.Label style={{color:'white'}}>Time</Form.Label>
-                            <Form.Control onChange={(e) => { setTime(e.target.value) }} value={time} type="time" placeholder='Enter Time' className="modalTextField" style={{ paddingRight: "6px" }} /> {/*Stack Overflow: https://stackoverflow.com/questions/68283103/how-to-change-colour-of-react-bootstrap-time-picker*/}
-                        </Form.Group>
-                        <Button variant='primary' type='submit'>
-                            Submit
-                        </Button>
-                    </Form>
+                <Form onSubmit={handleSubmit} >
+                    <FormGroup>
+                        <Form.Label style={{ color: 'red' }}>{formatDay}</Form.Label>
+                    </FormGroup>
+                    <Form.Group className='mb-3'>
+                        <Form.Label style={{ color: 'white' }}>Event</Form.Label>
+                        <Form.Control onChange={(e) => { setEvent(e.target.value) }} value={event} placeholder='Enter event' />
+                    </Form.Group>
+                    <Form.Group className='mb-4'>
+                        <Form.Label style={{ color: 'white' }}>Time</Form.Label>
+                        <Form.Control onChange={(e) => { setTime(e.target.value) }} value={time} type="time" placeholder='Enter Time' className="modalTextField" style={{ paddingRight: "6px" }} /> {/*Stack Overflow: https://stackoverflow.com/questions/68283103/how-to-change-colour-of-react-bootstrap-time-picker*/}
+                    </Form.Group>
+
+                    <Form.Group className='mb-4'>
+                    <Form.Label style={{ color: 'white' }}>Description</Form.Label>
+                    <Textarea onChange={(e) => { setDescription(e.target.value) }} value={description} color="neutral" minRows={2} size="lg" variant="soft"/>
+                    </Form.Group>
+                    <Button variant='primary' type='submit'>
+                        Submit
+                    </Button>
+                </Form>
             </div>
         </div>
 

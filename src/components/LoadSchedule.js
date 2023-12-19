@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ViewSchedule from "./ViewSchedule";
+import '.././global.css';
 
 
 function LoadSchedule() {

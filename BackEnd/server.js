@@ -41,7 +41,8 @@ async function main() {
 const scheduleSchema = new mongoose.Schema({
     day: String,
     time: String,
-    event: String
+    event: String,
+    description: String
 })
 
 //confirms which database you would like the collection to be in
@@ -72,7 +73,8 @@ app.post('/api/schedule',(req, res)=>{//routes the HTTP PUT requests to the spec
     scheduleModel.create({
         day: req.body.day,
         event: req.body.event,
-        time: req.body.time
+        time: req.body.time,
+        description: req.body.description
     })
         .then(()=>{res.send("Schedule Created")})
         .catch(()=>{res.send("Schedule NOT Created")});

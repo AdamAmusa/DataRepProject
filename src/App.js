@@ -19,11 +19,11 @@ function App() {
       {/*Navbar Element from bootstrap*/}
        <Navbar bg="dark" data-bs-theme="dark"> 
         <Container>
-          <Navbar.Brand href="/">Navbar</Navbar.Brand>{/* */}
+          <Navbar.Brand href="/">Schedule.io</Navbar.Brand>{/* */}
           <Nav className="me-auto">
             {/*Creates link names that will redirect the user by clicking the buttons*/}
-            <Nav.Link href="/">Home</Nav.Link> 
-            <Nav.Link href='/ViewSchedule'><FontAwesomeIcon icon={faClipboardList}/> Scheduled</Nav.Link> 
+            <Nav.Link href="/">schedule</Nav.Link> 
+            <Nav.Link href='/ViewSchedule'><FontAwesomeIcon icon={faClipboardList}/> myList</Nav.Link> 
           </Nav>
         </Container>
       </Navbar>

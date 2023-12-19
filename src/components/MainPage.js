@@ -1,5 +1,6 @@
 import Calander from "./CalenderView";
 import '.././MainPage.css';
+import '.././global.css';
 
 function MainPage() {
 

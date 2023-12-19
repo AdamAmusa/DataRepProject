@@ -7,30 +7,43 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
+import '.././global.css';
 import { Link } from 'react-router-dom';
 
 function ViewSchedule(props) {
 
+    const { day } = props.schedule;
 
+    const dateObj = new Date(day);
+
+    const weekDay = dateObj.toLocaleDateString('en-US', {weekday:'long'})
+    const date = dateObj.getDate()
+    const month = dateObj.toLocaleDateString('en-US', {month:'long'})
+    const year = dateObj.getFullYear();
+
+    let formatDay = `${weekDay} ${date} ${month} ${year}`;
 
     return (
 
 
 
-        <div >
+        <div className='ViewSchedule'>
           
  
             {/*Card container */}
             <Container className="myContainer">
-                <Row >
+                <Row>
                     <Col>
                         <Card className="card" >
                             <Card.Body>
                                 <div className="card-contents">
                                     <Card.Title><h2>{props.schedule.event}</h2></Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">{props.schedule.day}</Card.Subtitle>
+                                    <Card.Subtitle className="mb-2 text-muted">{formatDay}</Card.Subtitle>
                                     <Card.Text>
                                         {props.schedule.time}
+                                    </Card.Text>
+                                    <Card.Text>
+                                        {props.schedule.description}
                                     </Card.Text>
                                 </div>
                             </Card.Body>

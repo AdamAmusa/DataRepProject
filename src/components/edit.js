@@ -10,6 +10,7 @@ import Calendar from 'react-calendar';
 import "react-datepicker/dist/react-datepicker.css";
 import { Container } from 'react-bootstrap';
 import '.././Edit.css';
+import '.././global.css';
 
 
 
