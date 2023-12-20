@@ -86,8 +86,6 @@ app.get('/api/schedules', async(req,res) =>{
 })
 
 app.get('/api/schedule/:identifier', async(req,res)=>{
-    console.log(req.params.identifier);
-
     let schedule = await scheduleModel.findById(req.params.identifier); //Finds schedule by id
     res.send(schedule);//sends the schedule that was found to the webpage
 })
