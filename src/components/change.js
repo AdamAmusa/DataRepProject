@@ -28,6 +28,7 @@ export default function Change() {
     const [description, setDescription] = useState('');
     const [selectDate, onChange] = useState(new Date());
 
+    
      // Use selectDate to store the selected date
     //turns the string into an object so it can use the date functions
     
@@ -44,7 +45,6 @@ export default function Change() {
 
 
     const dateObj = new Date(selectDate);
-    console.log("Date variable: " + dateObj)
     const weekDay = dateObj.toLocaleDateString('en-US', {weekday:'long'})
     const date = dateObj.getDate()
     const month = dateObj.toLocaleDateString('end-US', {month:'long'})
@@ -59,11 +59,13 @@ export default function Change() {
  console.log("Formatted  Day: " + formatDay)
 
     useEffect(() => {
+        
         //axios is a promised based web client
         //make a HTTP Request with GET method and pass as part of the
         //url.
         axios.get('http://localhost:4000/api/schedule/' + id)
             .then((response) => {
+                onChange(response.data.day)
                 // Assign Response data to the arrays using useState.
                 setDay(response.data.day);
                 setTime(response.data.time);
