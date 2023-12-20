@@ -12,44 +12,39 @@ import Textarea from '@mui/joy/Textarea';
 
 
 function CalenderView() {
-    const [day, onChange] = useState(new Date());
+    //allows the value of the constant to change when something happens 
+    const [day, onChange] = useState(new Date());//State for selected date in calander
     const [event, setEvent] = useState('');
     const [time, setTime] = useState('');
     const [description, setDescription] = useState('');
 
+    //formats the day to a string format for easy readability
     const weekDay = day.toLocaleDateString('en-US', { weekday: 'long' })
     const date = day.getDate()
     const month = day.toLocaleDateString('end-US', { month: 'long' })
     const year = day.getFullYear();
-
     let formatDay = `${weekDay} ${date} ${month} ${year}`;
 
 
     const handleSubmit = (e) => {
-
-
-
-
+        // Prevent the default behavior (navigating to a new page) when the link is clicked
         e.preventDefault();
 
-
-        console.log("Day: " + formatDay +
-            " Event: " + event +
-            " Time: " + time);
-
+        // Create an object named 'schedule' with properties initialized using state variables
         const schedule = {
             day: day,
             event: event,
             time: time,
             description: description
         }
+        
 
         //logs information to the web page console
         axios.post('http://localhost:4000/api/schedule', schedule)
             .then()
             .catch();
 
-
+        alert('Schedule successfully created!');
     }
 
 
