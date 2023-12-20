@@ -17,4 +17,10 @@ body, html {
 
 .card-contents {
   text-align: left;
+  
+}
+.card-text{
+  margin: 1;
+  padding: 1;
+ 
 }

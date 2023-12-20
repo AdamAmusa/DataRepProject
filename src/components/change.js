@@ -11,10 +11,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Container } from 'react-bootstrap';
 import '.././Edit.css';
 import '.././global.css';
+import Textarea from '@mui/joy/Textarea';
 
 
 
-export default function Edit() {
+export default function Change() {
     // The useParams hook returns an object of key/value pairs of
     // the dynamic params from the current URL that were matched by
     //the <Route path>.
@@ -24,21 +25,38 @@ export default function Edit() {
     const [day, setDay] = useState("");
     const [time, setTime] = useState("");
     const [event, setEvent] = useState("");
-
-
+    const [description, setDescription] = useState('');
     const [selectDate, onChange] = useState(new Date());
+
+     // Use selectDate to store the selected date
+    //turns the string into an object so it can use the date functions
+    
+
+    
+    
+
     // useNavigate return a function that we can use to navigate
     const navigate = useNavigate();
     //useEffect Hook is similar componentDidMount
 
-    const weekDay = selectDate.toLocaleDateString('en-US', {weekday:'long'})
-    const date = selectDate.getDate()
-    const month = selectDate.toLocaleDateString('end-US', {month:'long'})
-    const year = selectDate.getFullYear();
-
-    let formatDay = `${weekDay} ${date} ${month} ${year}`;
+    
+    //console.log("Date object: " + dateObj)
 
 
+    const dateObj = new Date(selectDate);
+    console.log("Date variable: " + dateObj)
+    const weekDay = dateObj.toLocaleDateString('en-US', {weekday:'long'})
+    const date = dateObj.getDate()
+    const month = dateObj.toLocaleDateString('end-US', {month:'long'})
+    const year = dateObj.getFullYear();
+
+    let formatDay = `${weekDay} ${date} ${month} ${year}`; 
+ 
+   
+    //formats the day to a string format for easy readability
+   
+
+ console.log("Formatted  Day: " + formatDay)
 
     useEffect(() => {
         //axios is a promised based web client
@@ -50,18 +68,22 @@ export default function Edit() {
                 setDay(response.data.day);
                 setTime(response.data.time);
                 setEvent(response.data.event);
+                setDescription(response.data.description)
             })
             .catch(function (error) {//catches errors
                 console.log(error);
             })
     }, []);
-    const handleSubmit = (process) => {//function saves the data being submitted
+    const Submit = (process) => {//function saves the data being submitted
         process.preventDefault();
+
+        console.log(day);
         const newSchedule = {//data is organised for json format
             id: id,
-            day: formatDay,
+            day: selectDate,
             event: event,
-            time: time
+            time: time,
+            description: description
         };
         axios.put('http://localhost:4000/api/schedule/' + id, newSchedule)//sends to http which has a get method
             .then((res) => {
@@ -77,7 +99,7 @@ export default function Edit() {
             <Container className='Edit'>
                 <Row>
                     <Col className='mr-4'>
-                        <Form onSubmit={handleSubmit} className='Col1'  >{/*When the form is submitted the function is called to handle the data */}
+                        <Form onSubmit={Submit} className='Col1'  >{/*When the form is submitted the function is called to handle the data */}
 
                             <Form.Group as={Row} className="mb-3">
                                 <Form.Label column sm={2} style={{ color: 'white' }}>
@@ -119,6 +141,17 @@ export default function Edit() {
                                             
                                             value={time}//variable is assigned as a property
                                             onChange={(e) => setTime(e.target.value)} />
+                                    </div>
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group as={Row} className="mb-3">
+                                <Form.Label column sm={2} style={{ color: 'white' }}>
+                                    Description
+                                </Form.Label>
+                                <Col sm={10}>
+                                    <div className='mb-4'>
+                                    <Textarea onChange={(e) => { setDescription(e.target.value) }} value={description} color="neutral" minRows={2} size="lg" variant="soft"></Textarea>
                                     </div>
                                 </Col>
                                 <div className="form-group">

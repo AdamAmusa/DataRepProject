@@ -9,7 +9,7 @@ import {BrowserRouter,Routes, Route} from 'react-router-dom';
 import LoadSchedule from './components/LoadSchedule';
 import { faCalendarDay,  faClipboardList } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Edit from './components/edit';
+import Change from './components/change';
 
 //ROUTING PAGE AND NAVBAR PAGE
 function App() { 
@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route path = '/' element={<MainPage></MainPage>}></Route>{/*Establishes the root to be the main page component*/}
         <Route path ='/ViewSchedule' element={<LoadSchedule></LoadSchedule>}></Route>
-        <Route path = '/edit/:id' element={<Edit></Edit>}></Route>
+        <Route path = '/change/:id' element={<Change></Change>}></Route>
       </Routes>
     </div>
     </BrowserRouter>
