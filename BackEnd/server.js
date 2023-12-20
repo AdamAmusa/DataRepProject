@@ -50,7 +50,7 @@ const scheduleModel = mongoose.model('my_schedule', scheduleSchema);
 
 //server listens for a http request with a delete method
 app.delete('/api/schedule/:id', async (req, res)=>{
-    console.log("Delete: "+req.params.id);
+    console.log("Deleted: "+req.params.id);
     
     let schedule= await scheduleModel.findByIdAndDelete(req.params.id);//find a schedule with the id and deletes it
     res.send(schedule);
