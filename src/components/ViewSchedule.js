@@ -49,7 +49,7 @@ function ViewSchedule(props) {
                                     
                                 </div>
                             </Card.Body>
-                            <h1><Countdown style={{ fontSize: '50px' }} date={props.schedule.day} /></h1>
+                            <h1><Countdown style={{ fontSize: '50px' }} date={props.schedule.day} /></h1>{/*countdown display that counts down from the day the event begins, source:  https://www.npmjs.com/package/react-countdown*/}
                         </Card>
                     </Col>
                     <Col>
@@ -62,7 +62,7 @@ function ViewSchedule(props) {
                                     let reload = props.ReloadData();
                                     
                                 })
-                                .catch();
+                                .catch(); //catches errors
                             }} value="Delete"/>
                         </div>
                         <div className="mb-4">

@@ -53,21 +53,22 @@ function CalenderView() {
 
     return (
 
-        //https://www.npmjs.com/package/react-calendar
+        
         <div className='centered-container'>
             <div className='centered-content'>
-                <Calendar className="calander-style" onChange={onChange} value={day} />
+                <Calendar className="calander-style" onChange={onChange} value={day} />{/*https://www.npmjs.com/package/react-calendar*/}
             </div>
 
             <div>
                 {/* Render the form when showForm is true */}
                 <Form onSubmit={handleSubmit} >
                     <FormGroup>
-                        <Form.Label style={{ color: 'red' }}>{formatDay}</Form.Label>
+                        <Form.Label style={{ color: 'red' }}>{formatDay}</Form.Label> {/*Displays the day as string format*/}
                     </FormGroup>
                     <Form.Group className='mb-3'>
                         <Form.Label style={{ color: 'white' }}>Event</Form.Label>
-                        <Form.Control onChange={(e) => { setEvent(e.target.value) }} value={event} placeholder='Enter event' />
+                        <Form.Control onChange={(e) => { setEvent(e.target.value) }} value={event} placeholder='Enter event' /> {/*variable is assigned as a property variable and changes as the input changes*/}
+                                            
                     </Form.Group>
                     <Form.Group className='mb-4'>
                         <Form.Label style={{ color: 'white' }}>Time</Form.Label>
@@ -76,7 +77,7 @@ function CalenderView() {
 
                     <Form.Group className='mb-4'>
                     <Form.Label style={{ color: 'white' }}>Description</Form.Label>
-                    <Textarea onChange={(e) => { setDescription(e.target.value) }} value={description} color="neutral" minRows={2} size="lg" variant="soft"/>
+                    <Textarea onChange={(e) => { setDescription(e.target.value) }} value={description} color="neutral" minRows={2} size="lg" variant="soft"/> {/*variable is assigned as a property variable and changes as the input changes*/}
                     </Form.Group>
                     <Button variant='primary' type='submit'>
                         Submit

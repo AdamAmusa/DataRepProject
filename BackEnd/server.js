@@ -37,7 +37,7 @@ async function main() {
     // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 
-//defines objects for the book collection
+//defines objects for the schedule collection
 const scheduleSchema = new mongoose.Schema({
     day: String,
     time: String,
@@ -52,7 +52,7 @@ const scheduleModel = mongoose.model('my_schedule', scheduleSchema);
 app.delete('/api/schedule/:id', async (req, res)=>{
     console.log("Delete: "+req.params.id);
     
-    let schedule= await scheduleModel.findByIdAndDelete(req.params.id);//find a book with the id and deletes it
+    let schedule= await scheduleModel.findByIdAndDelete(req.params.id);//find a schedule with the id and deletes it
     res.send(schedule);
 })
 
@@ -88,8 +88,8 @@ app.get('/api/schedules', async(req,res) =>{
 app.get('/api/schedule/:identifier', async(req,res)=>{
     console.log(req.params.identifier);
 
-    let schedule = await scheduleModel.findById(req.params.identifier); //Finds book by id
-    res.send(schedule);//sends the book that was found to the webpage
+    let schedule = await scheduleModel.findById(req.params.identifier); //Finds schedule by id
+    res.send(schedule);//sends the schedule that was found to the webpage
 })
 
 

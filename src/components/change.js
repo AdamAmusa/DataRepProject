@@ -135,9 +135,9 @@ export default function Change() {
                                 </Form.Label>
                                 <Col sm={10}>
                                     <div className='mb-4'>
-                                        <input type="text"
+                                        <input type="time"
                                             className="form-control"
-                                            
+                                           
                                             value={time}//variable is assigned as a property
                                             //variable changes as the input changes
                                             onChange={(e) => setTime(e.target.value)} />
@@ -157,7 +157,7 @@ export default function Change() {
                                 </Col>
                                 <div className="form-group">
                                     {/*Submit button which calls the function */}
-                                    <input type="submit" value="Edit Book" className="btn btn-primary" />
+                                    <input type="submit" value="Edit" className="btn btn-primary" />
                                 </div>
                             </Form.Group>
 
