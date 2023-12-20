@@ -22,38 +22,31 @@ export default function Change() {
     let { id } = useParams();
     // update arrays using the React useState()
     // and without the Array objects push() method
+
+    //allows the value of the constant to change when something happens 
     const [day, setDay] = useState("");
     const [time, setTime] = useState("");
     const [event, setEvent] = useState("");
     const [description, setDescription] = useState('');
-    const [selectDate, onChange] = useState(new Date());
+    const [selectDate, onChange] = useState(new Date());//State for selected date in calander
 
-    
-     // Use selectDate to store the selected date
-    //turns the string into an object so it can use the date functions
-    
-
-    
-    
 
     // useNavigate return a function that we can use to navigate
     const navigate = useNavigate();
-    //useEffect Hook is similar componentDidMount
-
-    
-    //console.log("Date object: " + dateObj)
 
 
+    //formats the date to an object
     const dateObj = new Date(selectDate);
+    //formats the day to a string format for easy readability
     const weekDay = dateObj.toLocaleDateString('en-US', {weekday:'long'})
     const date = dateObj.getDate()
     const month = dateObj.toLocaleDateString('end-US', {month:'long'})
     const year = dateObj.getFullYear();
-
+    //fully formatted day saved into variable
     let formatDay = `${weekDay} ${date} ${month} ${year}`; 
  
    
-    //formats the day to a string format for easy readability
+    
    
 
  console.log("Formatted  Day: " + formatDay)
@@ -65,6 +58,7 @@ export default function Change() {
         //url.
         axios.get('http://localhost:4000/api/schedule/' + id)
             .then((response) => {
+                //initial date in calander is equal to what is in the database
                 onChange(response.data.day)
                 // Assign Response data to the arrays using useState.
                 setDay(response.data.day);
@@ -79,7 +73,7 @@ export default function Change() {
     const Submit = (process) => {//function saves the data being submitted
         process.preventDefault();
 
-        console.log(day);
+        
         const newSchedule = {//data is organised for json format
             id: id,
             day: selectDate,
@@ -90,7 +84,7 @@ export default function Change() {
         axios.put('http://localhost:4000/api/schedule/' + id, newSchedule)//sends to http which has a get method
             .then((res) => {
                 console.log(res.data);
-                navigate('/ViewSchedule');
+                navigate('/ViewSchedule');//redirects to the previus page on selection
             });
     }
     return (
@@ -98,6 +92,7 @@ export default function Change() {
 
             <h1 style={{ color: 'white'}}>Edit</h1>
             <p style={{color: 'white'}}>Use the calander to change the date</p>
+            
             <Container className='Edit'>
                 <Row>
                     <Col className='mr-4'>
@@ -112,7 +107,8 @@ export default function Change() {
                                         <input type="text"
                                             className="form-control"
                                             value={event}//variable is assigned as a property
-                                            onChange={(e) => setEvent(e.target.value)} />
+                                            //variable changes as the input changes
+                                            onChange={(e) => setEvent(e.target.value)} /> 
                                     </div>
                                 </Col>
                             </Form.Group>
@@ -127,6 +123,7 @@ export default function Change() {
                                             className="form-control"
                                             disabled='true'
                                             value={formatDay}//variable is assigned as a property
+                                            //variable changes as the input changes
                                             onChange={(e) => setDay(e.target.value)} />
                                     </div>
                                 </Col>
@@ -142,6 +139,7 @@ export default function Change() {
                                             className="form-control"
                                             
                                             value={time}//variable is assigned as a property
+                                            //variable changes as the input changes
                                             onChange={(e) => setTime(e.target.value)} />
                                     </div>
                                 </Col>
@@ -153,10 +151,12 @@ export default function Change() {
                                 </Form.Label>
                                 <Col sm={10}>
                                     <div className='mb-4'>
+                                    {/*Variable changes as the input changes */}
                                     <Textarea onChange={(e) => { setDescription(e.target.value) }} value={description} color="neutral" minRows={2} size="lg" variant="soft"></Textarea>
                                     </div>
                                 </Col>
                                 <div className="form-group">
+                                    {/*Submit button which calls the function */}
                                     <input type="submit" value="Edit Book" className="btn btn-primary" />
                                 </div>
                             </Form.Group>
@@ -165,6 +165,7 @@ export default function Change() {
                     </Col>
                     <Col>
                         <div >
+                            {/*Calander with a function which handles the changes in selected day */}
                             <Calendar onChange={onChange} value={selectDate} />
                         </div>
                     </Col>
